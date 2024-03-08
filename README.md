@@ -1,30 +1,6 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Water Jug challenge Application Version 0.1.0
 
 ## Installation
 
@@ -51,22 +27,72 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
 ```
 
-## Support
+## How to Use
+To use this application, you need to make a POST request to the following endpoint:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+```bash
+/water-jug/solve
+```
+The payload for the POST request should be a JSON object with the following format:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+
+{
+  "x": <initial volume of jug X in milliliters>,
+  "y": <initial volume of jug Y in milliliters>,
+  "z": <desired volume of jug Z in milliliters>
+}
+```
+
+For example, if you want to solve the classic water jug problem where jug X has a capacity of 3 liters, jug Y has a capacity of 5 liters, and the desired volume is 4 liters, the payload would look like this:
+```bash
+{
+  "x": 2,
+  "y": 98,
+  "z": 100
+}
+```
+
+Upon receiving a valid request, the application will return a JSON array of objects, where each object represents a step in the solution. The format of each object is as follows:
+```bash
+{
+  "x": <new volume of jug X in milliliters>,
+  "y": <new volume of jug Y in milliliters>,
+  "operation": <description of the operation performed>,
+  "steps": <number of steps taken so far>
+}
+```
+
+For example, the solution to the problem above might look like this:
+```bash
+[
+    {
+        "x": 0,
+        "y": 100,
+        "operation": "Empty X",
+        "steps": 1
+    },
+    {
+        "x": 2,
+        "y": 98,
+        "operation": "Transfer X to Y",
+        "steps": 2
+    },
+    {
+        "x": 2,
+        "y": 98,
+        "operation": "Solved",
+        "steps": 3
+    }
+]
+```
+
+In this example, the solution is achieved in 3 steps. The "Solved" object indicates that the desired volume of water can be obtained by leaving 2 liters of water in jug X and 98 water in jug Y.
 
 ## License
 
